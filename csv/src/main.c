@@ -3,9 +3,9 @@
 #include <stddef.h>
 #include <string.h>
 
-#include "../include/cli.h" // обрабатывает аргументы командной строки 
-#include "../include/csv.h" // читает csv файл и формирует таблицу
-#include "../include/stats.h" // проходит по таблице и собирает статистику
+#include "../include/cli.h" 
+#include "../include/csv.h" 
+#include "../include/stats.h" 
 
 typedef enum {
     SUCCESS,
@@ -16,41 +16,41 @@ typedef enum {
 
 int main (int argn, char** argv) {
     
-    CLI_data cli_data = command_line_parse(argn, argv); // возвращает пару значений: путь до файла и режим работы 
+    CLI_data cli_data = command_line_parse(argn, argv); 
     
-    if (cli_data.mode == ERROR_MODE) { // в командной строке неверная команда 
+    if (cli_data.mode == ERROR_MODE) { 
         fprintf(stderr, "Invalid command!\n");
         return CLI_ERROR;
     }
 
-    if (cli_data.mode == HELP_MODE) { // аргумент --help
+    if (cli_data.mode == HELP_MODE) { 
         print_help(); // напечатать справку
         return SUCCESS;
     }
 
-    Table* table = parse_table(cli_data.filepath); // открыть и прочитать файл, создать и вернуть таблицу
-    if (table == NULL) { // по какой-то причине таблица не создана
+    Table* table = parse_table(cli_data.filepath); 
+    if (table == NULL) { 
         fprintf(stderr, "Parsing error!\n");
         return RUNTIME_ERROR;
     }
 
-    if (cli_data.mode == SCHEMA_MODE) { // аргумент schema
-        if (!schema(table)) { // вызвать функцию schema и, если вернулся 0, вывести ошибку
+    if (cli_data.mode == SCHEMA_MODE) { 
+        if (!schema(table)) { 
             fprintf(stderr, "Calculation error!\n");
-            goto fail; // перейти к блоку fail
+            goto fail; 
         }
-    } else if (cli_data.mode == STATS_MODE) { // аргумент stats
-        if (!stats(table)) { // вызвать функцию stats и, если вернулся 0, вывести ошибку
+    } else if (cli_data.mode == STATS_MODE) { 
+        if (!stats(table)) { 
             fprintf(stderr, "Calculation error!\n");
             goto fail;
         }
     }
     else {
-        fprintf(stderr, "Unknown mode!\n"); // практически невозможно, но лучше прописать ошибку на будущее
+        fprintf(stderr, "Unknown mode!\n"); 
         goto fail;
     }
 
-    free_table(table); // очистить память таблицы с помощью специальной функции
+    free_table(table); 
     return SUCCESS;
 
 fail:

@@ -1,5 +1,5 @@
 #pragma once
 #include "./csv.h"
 
-int schema (Table* table); // выполнить команду (посчитать и напечатать) либо при ошибке вернуть 0
-int stats (Table* table); // выполнить команду (посчитать и напечатать) либо при ошибке вернуть 0
+int schema (Table* table); 
+int stats (Table* table); 

@@ -11,7 +11,7 @@ typedef enum {
     SUCCESS,
     RUNTIME_ERROR,
     CLI_ERROR,
-} ExitCode; // код, возвращаемый функцией main
+} ExitCode; 
 
 
 int main (int argn, char** argv) {
@@ -24,7 +24,7 @@ int main (int argn, char** argv) {
     }
 
     if (cli_data.mode == HELP_MODE) { 
-        print_help(); // напечатать справку
+        print_help(); 
         return SUCCESS;
     }
 

@@ -1,24 +1,24 @@
 #pragma once
-#include <stddef.h> // чтобы использовать size_t - тип для хранения размеров массивов
+#include <stddef.h> 
 
 typedef enum {
     TYPE_INT,
     TYPE_DOUBLE,
-} Column_type; // тип столбца
+} Column_type; 
 
 typedef struct {
-    void* ptr; // указатель на данные произвольного типа (т.к. тип может поменяться в процессе чтения с int на double)
-    Column_type type; // тип
-    size_t size; // фактическое число элементов
-    size_t capacity; // на сколько элементов выделено памяти (чтобы не выделять при каждом добавлении)
-    char* header; // заголовок (название) столбца
-} Column; // сам столбец
+    void* ptr; 
+    Column_type type; 
+    size_t size; 
+    size_t capacity; 
+    char* header; 
+} Column; 
 
 typedef struct {
-    Column** columns; // массив столбцов 
-    size_t size; // кол-во столбцов 
-    size_t capacity; // на сколько столбцов выделено памяти
-} Table; // вся таблица 
+    Column** columns; 
+    size_t size; 
+    size_t capacity; 
+} Table; 
 
-Table* parse_table (char* filepath); // прочитать файл и вернуть таблицу (или NULL при ошибке) 
-void free_table (Table* table); // очистить память таблицы, чтобы не было утечки
+Table* parse_table (char* filepath); 
+void free_table (Table* table); 

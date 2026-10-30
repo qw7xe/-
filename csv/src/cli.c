@@ -4,8 +4,7 @@
 #include "../include/cli.h"
 
 CLI_data command_line_parse (int argn, char** argv) {
-    CLI_data result = {.filepath = NULL, .mode = ERROR_MODE}; // инициализация (значения по умолчанию)
-    // argn число аргументов, при этом argv[0] это сам вызов ./run, поэтому нужных нам, осмысленных аргументов на один меньше 
+    CLI_data result = {.filepath = NULL, .mode = ERROR_MODE}; 
     if (argn == 2 && strcmp(argv[1], "--help") == 0) {
         result.mode = HELP_MODE;
 
@@ -17,15 +16,15 @@ CLI_data command_line_parse (int argn, char** argv) {
         else if (strcmp(argv[1], "stats") == 0)
             result.mode = STATS_MODE;
         
-        if (result.mode != ERROR_MODE) // путь к файлу только если вызвана одна из двух команд
+        if (result.mode != ERROR_MODE) 
             result.filepath = argv[2];
     }
     return result;
 }
 
 void print_help (void) {
-    printf("Usage: ./run [command] <file.csv>\n"); // Использование: ./run [команда] <файл.csv>
-    printf("\nCommands: schema - general info\n"); // schema - общая информация
-    printf("          stats  - detailed info\n"); // stats - подробная информация
-    printf("\nFor help: ./run --help\n"); // для справки: ./run --help
+    printf("Usage: ./run [command] <file.csv>\n"); 
+    printf("\nCommands: schema - general info\n"); 
+    printf("          stats  - detailed info\n"); 
+    printf("\nFor help: ./run --help\n"); 
 }
